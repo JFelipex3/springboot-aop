@@ -3,7 +3,6 @@ package com.jmachuca.curso.springboot.app.aop.springboot_aop.aop;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -20,10 +19,10 @@ public class GreetingFooAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("execution(* com.jmachuca.curso.springboot.app.aop.springboot_aop.services.GreetingService.*(..))")
-    public void serviceLayerMethods() {}
+    @Pointcut("execution(* com.jmachuca.curso.springboot.app.aop.springboot_aop.services.*.*(..))")
+    public void serviceLayerMethodsFoo() {}
 
-    @Before("serviceLayerMethods()")
+    @Before("serviceLayerMethodsFoo()")
     public void loggerBefore(JoinPoint joinPoint) {
 
         String method = joinPoint.getSignature().getName();
@@ -32,7 +31,7 @@ public class GreetingFooAspect {
         logger.info("GreetingFooAspect - Antes de ejecutar: {}.{}({})", joinPoint.getSignature().getDeclaringTypeName(), method, args);
     }
 
-    @AfterReturning(pointcut = "serviceLayerMethods()", returning = "result")
+    @AfterReturning(pointcut = "serviceLayerMethodsFoo()", returning = "result")
     public void loggerAfterReturning(JoinPoint joinPoint, Object result) {
 
         String method = joinPoint.getSignature().getName();
