@@ -12,4 +12,9 @@ public class GreetingServiceImpl implements GreetingService {
         return greeting;
     }
 
+    @Override
+    public String sayHelloError(String person, String phrase) {
+        throw new RuntimeException("Error generado en el proceso!!!");
+    }
+
 }
