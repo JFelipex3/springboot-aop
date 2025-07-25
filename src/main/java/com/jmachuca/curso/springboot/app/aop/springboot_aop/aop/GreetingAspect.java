@@ -22,7 +22,7 @@ public class GreetingAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("serviceLayerMethods()")
+    @Before("GreetingServicePointcuts.serviceLayerMethods()")
     public void loggerBefore(JoinPoint joinPoint) {
 
         String method = joinPoint.getSignature().getName();
@@ -31,7 +31,7 @@ public class GreetingAspect {
         logger.info("Antes de ejecutar: {}.{}({})", joinPoint.getSignature().getDeclaringTypeName(), method, args);
     }
 
-    @AfterReturning(pointcut = "serviceLayerMethods()", returning = "result")
+    @AfterReturning(pointcut = "GreetingServicePointcuts.serviceLayerMethods()", returning = "result")
     public void loggerAfterReturning(JoinPoint joinPoint, Object result) {
 
         String method = joinPoint.getSignature().getName();
@@ -39,7 +39,7 @@ public class GreetingAspect {
         logger.info("Después de ejecutar y retornar exitosamente: {}.{}() con resultado: {}", joinPoint.getSignature().getDeclaringTypeName(), method, result);
     }
 
-    @AfterThrowing(pointcut = "serviceLayerMethods()", throwing = "exception")
+    @AfterThrowing(pointcut = "GreetingServicePointcuts.serviceLayerMethods()", throwing = "exception")
     public void loggerAfterThrowing(JoinPoint joinPoint, Exception exception) {
 
         String method = joinPoint.getSignature().getName();
@@ -48,14 +48,14 @@ public class GreetingAspect {
         logger.info("Después de ejecutar y lanzar excepción: {}.{}() con argumentos: {} con excepción: {}", joinPoint.getSignature().getDeclaringTypeName(), method, args, exception.getMessage());
     }
 
-    @After("serviceLayerMethods()")
+    @After("GreetingServicePointcuts.serviceLayerMethods()")
     public void logAfter(JoinPoint joinPoint) {
         logger.info("Después de finalizar (siempre): {}.{}()",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName());
     }
 
-    @Around("serviceLayerMethods()")
+    @Around("GreetingServicePointcuts.serviceLayerMethods()")
     public Object loggerAround(ProceedingJoinPoint joinPoint) throws Throwable{
 
         String method = joinPoint.getSignature().getName();

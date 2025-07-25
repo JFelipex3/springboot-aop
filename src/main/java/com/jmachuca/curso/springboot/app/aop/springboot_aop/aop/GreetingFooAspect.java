@@ -18,7 +18,7 @@ public class GreetingFooAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("serviceLayerMethodsFoo()")
+    @Before("GreetingServicePointcuts.serviceLayerMethodsFoo()")
     public void loggerBefore(JoinPoint joinPoint) {
 
         String method = joinPoint.getSignature().getName();
@@ -27,7 +27,7 @@ public class GreetingFooAspect {
         logger.info("GreetingFooAspect - Antes de ejecutar: {}.{}({})", joinPoint.getSignature().getDeclaringTypeName(), method, args);
     }
 
-    @AfterReturning(pointcut = "serviceLayerMethodsFoo()", returning = "result")
+    @AfterReturning(pointcut = "GreetingServicePointcuts.serviceLayerMethodsFoo()", returning = "result")
     public void loggerAfterReturning(JoinPoint joinPoint, Object result) {
 
         String method = joinPoint.getSignature().getName();
